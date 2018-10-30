@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Button } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 export class Welcome extends Component {
@@ -14,13 +14,16 @@ export class Welcome extends Component {
 				</View>
 				<View style={styles.body}>
 					<Image source={require('../assets/bg.jpeg')} style={styles.bg} />
-					<Button title="Entrar" onPress={() => {}} />
+					<TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} style={styles.button}>
+						<Text style={styles.buttonText}>Entrar</Text>
+					</TouchableOpacity>
 					<Text style={styles.heading_3}>Ainda não faz parte? Cadastra-se já!</Text>
-				</View>
-				<View style={styles.footer}>
-					<Text style={styles.heading_4}>Trabalhe conosco lojista.</Text>
-					<Text style={styles.heading_5}>Peça sua vaga</Text>
-					<View style={styles.line}></View>
+					<View style={styles.footer}>
+						<Text style={styles.heading_4}>Trabalhe conosco lojista.</Text>
+						<Text style={styles.heading_5}>Peça sua vaga</Text>					
+
+						<View style={styles.line}></View>
+					</View>
 				</View>
 			</View>
 		);
@@ -38,34 +41,62 @@ const mapStateToProps = (state) => {
 const styles = StyleSheet.create({
 	container:{
 		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'space-around',
 		backgroundColor: '#FFFFFF'
 	},
 	header:{
-
+		margin: 20
 	},
 	body:{
-
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'space-between',
 	},
 	bg:{
 		width: 336,
 		height: 260
 	},
+	button:{
+		width: '80%',
+		padding: 17,
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: '#ff3c36',
+		borderRadius: 10
+	},
+	buttonText:{
+		fontWeight: 'bold',
+		fontSize: 15,
+		color: '#FFF'
+	},
 	heading_1:{
-
+		fontWeight: 'bold',
+		color: '#4a4f53',
+		alignSelf: 'flex-start'
 	},
 	heading_2:{
-
+		color: '#ff3c36',
+		fontWeight: 'bold',
+		fontSize: 30
 	},
 	heading_3:{
-
+		fontWeight: 'bold',
+		color: '#a8a9ab',
+		textAlign: 'center'
 	},
 	heading_4:{
-
+		fontWeight: 'bold',
+		color: '#4a4f53'
 	},
 	heading_5:{
-
+		fontWeight: 'bold',
+		color: '#ff3c36',
+		textAlign: 'center',
+		marginBottom: 20
+	},
+	line:{
+		borderWidth: 3,
+		borderColor: '#a9acb1',
+		marginBottom: 5
 	},
 	footer:{
 
