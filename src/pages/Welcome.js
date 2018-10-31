@@ -13,7 +13,7 @@ export class Welcome extends Component {
 					<Text style={styles.heading_2}>Envie sentimentos</Text>					
 				</View>
 				<View style={styles.body}>
-					<Image source={require('../assets/bg.jpeg')} style={styles.bg} />
+					<Image source={require('../assets/bg.png')} style={styles.bg} />
 					<TouchableOpacity onPress={() => this.props.navigation.navigate('Login')} style={styles.button}>
 						<Text style={styles.buttonText}>Entrar</Text>
 					</TouchableOpacity>
@@ -52,11 +52,11 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 	},
 	bg:{
-		width: 336,
-		height: 260
+		width: 332,
+		height: 255
 	},
 	button:{
-		width: '80%',
+		width: '90%',
 		padding: 17,
 		alignItems: 'center',
 		justifyContent: 'center',
@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
 	line:{
 		borderWidth: 3,
 		borderColor: '#a9acb1',
-		marginBottom: 5
+		marginBottom: 5,
+		borderRadius: 5		
 	},
 	footer:{
 
