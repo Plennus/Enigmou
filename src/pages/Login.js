@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { connect } from 'react-redux';
-import { Item, Label, Input, Form, Content } from 'native-base';
-import { SocialIcon } from 'react-native-elements';
+import { Item, Label, Input, Form, Content, Icon } from 'native-base';
 import { changeEmail, changePassword } from '../actions/AuthActions';
 
 export class Login extends Component {
@@ -11,48 +10,52 @@ export class Login extends Component {
 
 		return (
 			<View style={styles.container}>
-				<Image source={require('../assets/wave-grey.png')} style={styles.bgImage} />
-				<TouchableOpacity onPress={() => this.props.navigation.goBack()} style={styles.backButton}>
-					<Image source={require('../assets/back.png')} style={styles.backText} />
-				</TouchableOpacity>
-				<View style={styles.logoArea}>
-					<Image source={require('../assets/logo-black.png')} style={{width: 200, height: 50}} />
-				</View>
-				<View style={styles.formArea}>			
-					<Item floatingLabel success={this.props.successEmail} error={this.props.errorEmail}>
-		              <Label style={styles.formLabel}>Nome de usuario ou E-mail</Label>
-		              <Input value={this.props.email} onChangeText={this.props.changeEmail} />
-		            </Item>
-		            <Item floatingLabel style={styles.formItem}>
-		              <Label style={styles.formLabel}>Senha</Label>
-		              <Input />
-		            </Item>
-		            <TouchableOpacity onPress={() => {}}>
-		            	<Text style={[styles.formLabel, styles.forgetText]}>Esqueceu a senha?</Text>
-		            </TouchableOpacity>	            
-		        </View>
-		        <View style={styles.buttonArea}>
-		        	<View style={styles.buttonContent}>
-						<TouchableOpacity onPress={() => {}} style={[styles.button, styles.buttonBg]}>
-							<Text style={styles.buttonText}>Entrar</Text>
-						</TouchableOpacity>	
-					</View>
-		        	<View style={styles.buttonContent}>
-						<SocialIcon
-						  title='Entrar com Facebook'
-						  button
-						  type='facebook'
-						  style={{borderRadius: 10, width: '90%', alignSelf: 'center'}}
-						/>						
-					</View>	
-		        	<View style={styles.buttonContent}>
-						<TouchableOpacity onPress={() => {}} style={styles.signupButton}>
-							<Text style={styles.signupText}>Ainda não faz parte? Cadastre-se já!</Text>
-						</TouchableOpacity>	
-					</View>	
-					<View style={styles.line}></View>										
-		        </View>
-			</View>
+        <View>
+          <Image source={require('../assets/wave-grey.png')} style={styles.bgImage} />
+        </View>
+        <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={styles.backButton}>
+          <Image source={require('../assets/back.png')} style={styles.backText} />
+        </TouchableOpacity>
+        <View style={styles.logoArea}>
+          <Image source={require('../assets/logo-black.png')} style={{width: 200, height: 50}} />
+        </View>
+        <View style={styles.formArea}>			
+          <Item floatingLabel success={this.props.successEmail} error={this.props.errorEmail}>
+            <Label style={styles.formLabel}>Nome de usuario ou E-mail</Label>
+            <Input value={this.props.email} onChangeText={this.props.changeEmail} autoCapitalize="none" />
+          </Item>
+          <Item floatingLabel style={styles.formItem} error={this.props.errorPass} success={this.props.successPass}>
+            <Label style={styles.formLabel}>Senha</Label>
+            <Input value={this.props.password} onChangeText={this.props.changePassword} secureTextEntry={true} autoCapitalize="none" />
+          </Item>
+          <TouchableOpacity onPress={() => {}}>
+            <Text style={[styles.formLabel, styles.forgetText]}>Esqueceu a senha?</Text>
+          </TouchableOpacity>	            
+        </View>
+        <View style={styles.buttonArea}>
+          <View style={styles.buttonContent}>
+        <TouchableOpacity onPress={() => {}} style={[styles.button, styles.buttonBg]}>
+          <Text style={styles.buttonText}>Entrar</Text>
+        </TouchableOpacity>	
+      </View>
+      <View style={styles.buttonContent}>
+        <View style={styles.buttonMedia}>
+          <TouchableOpacity onPress={() => {}}>            
+            <View style={{flexDirection: 'row'}}>
+              <Image source={require('../assets/face.png')} style={{width: 20, height: 20, marginLeft: 10}} />
+              <Text style={styles.buttonText}>Entrar com o facebook</Text>  
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>	
+          <View style={styles.buttonContent}>
+        <TouchableOpacity onPress={() => {}} style={styles.signupButton}>
+          <Text style={styles.signupText}>Ainda não faz parte? Cadastre-se já!</Text>
+        </TouchableOpacity>	
+      </View>	
+      <View style={styles.line}></View>										
+      </View>
+		</View>
 		);
 
 	}
@@ -64,7 +67,9 @@ const mapStateToProps = (state) => {
 		email:state.auth.email,
 		password:state.auth.password,
 		successEmail:state.auth.successEmail,
-		errorEmail:state.auth.errorEmail
+		errorEmail:state.auth.errorEmail,
+    successPass:state.auth.successPass,
+    errorPass:state.auth.errorPass
 	};
 };
 
@@ -107,8 +112,18 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		alignSelf: 'center',
-		borderRadius: 10
+		borderRadius: 6,
+    marginBottom: 5
 	},
+  buttonMedia:{
+		width: '90%',
+		padding: 17,
+		alignItems: 'center',
+		justifyContent: 'center',
+		alignSelf: 'center',
+		borderRadius: 6,
+    backgroundColor: '#3b5998'
+  },
 	buttonText:{
 		fontWeight: 'bold',
 		fontSize: 15,
@@ -122,9 +137,6 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		color: '#a8a9ab',
 		textAlign: 'center'
-	},
-	signin:{
-		backgroundColor: '#3b5998'
 	},
 	buttonBg:{
 		backgroundColor: '#ff3c36'
@@ -148,7 +160,7 @@ const styles = StyleSheet.create({
 	bgImage:{
 		position: 'absolute',
 		top: 0,
-		right: 0,
+		left: 0,
 		width: 278,
 		height: 378 
 	}

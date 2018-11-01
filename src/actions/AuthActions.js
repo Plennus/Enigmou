@@ -15,3 +15,7 @@ export const changePassword = (password) => {
 		}
 	}
 }
+
+export const onblurEmail = (email) => {
+	alert(email);
+}

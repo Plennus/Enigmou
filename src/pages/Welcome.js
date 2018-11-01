@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Linking } from 'react-native';
 import { connect } from 'react-redux';
 
 export class Welcome extends Component {
+
+	openUrl() {
+		let url = "https://enigmou.com/sellers";
+		Linking.openURL(url);
+
+	}
 
 	render() {
 
@@ -20,8 +26,9 @@ export class Welcome extends Component {
 					<Text style={styles.heading_3}>Ainda não faz parte? Cadastra-se já!</Text>
 					<View style={styles.footer}>
 						<Text style={styles.heading_4}>Trabalhe conosco lojista.</Text>
-						<Text style={styles.heading_5}>Peça sua vaga</Text>					
-
+						<TouchableOpacity onPress={this.openUrl}>
+							<Text style={styles.heading_5}>Peça sua vaga</Text>					
+						</TouchableOpacity>
 						<View style={styles.line}></View>
 					</View>
 				</View>
@@ -71,7 +78,8 @@ const styles = StyleSheet.create({
 	heading_1:{
 		fontWeight: 'bold',
 		color: '#4a4f53',
-		alignSelf: 'flex-start'
+		alignSelf: 'flex-start',
+    marginTop: 20
 	},
 	heading_2:{
 		color: '#ff3c36',
